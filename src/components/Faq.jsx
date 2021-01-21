@@ -10,7 +10,7 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from '@chakra-ui/react';
-import FAQ_LIST from '../faq.json';
+import FAQ_LIST from '../utils/faq.json';
 
 export const Faq = ({ index, setIndex, currentFaqId, setCurrentFaqId }) => {
   return (

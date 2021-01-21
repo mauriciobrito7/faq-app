@@ -15,8 +15,7 @@ const App = () => {
   useEffect(() => {
     if (!alanBtnInstance.current) {
       alanBtnInstance.current = alanBtn({
-        key:
-          '02299655e90340d99c6fbdd8ce6c51fe2e956eca572e1d8b807a3e2338fdd0dc/stage',
+        key: process.env.REACT_APP_ALAN_API_KEY,
         onCommand: commandData => {
           if (commandData.command === 'gotoFaq') {
             scroller.scrollTo(`accordion-button-${commandData.faqId}`, {

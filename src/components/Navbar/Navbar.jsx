@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Flex, Spacer } from '@chakra-ui/react';
-import { ColorModeSwitcher } from '../../ColorModeSwitcher';
+import { ColorModeSwitcher } from './../ColorModeSwitcher';
 import { Band, Header } from './Navbar.styles';
 
 export const Navbar = ({ toggleColorFlag }) => {
