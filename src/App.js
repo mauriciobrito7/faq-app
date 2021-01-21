@@ -1,42 +1,48 @@
-import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import React, { useState, useEffect, useRef } from 'react';
+import { ChakraProvider, theme } from '@chakra-ui/react';
+import { Navbar } from './components/Navbar/Navbar';
+import { Faq } from './components/Faq';
+import alanBtn from '@alan-ai/alan-sdk-web';
+import { scroller } from 'react-scroll';
 
-function App() {
+const App = () => {
+  const alanBtnInstance = useRef(null);
+  const [index, setIndex] = useState(null);
+  const [currentFaqId, setCurrentFaqId] = useState(null);
+  const [toggleColorFlag, setToggleColorFlag] = useState(false);
+
+  useEffect(() => {
+    if (!alanBtnInstance.current) {
+      alanBtnInstance.current = alanBtn({
+        key:
+          '02299655e90340d99c6fbdd8ce6c51fe2e956eca572e1d8b807a3e2338fdd0dc/stage',
+        onCommand: commandData => {
+          if (commandData.command === 'gotoFaq') {
+            scroller.scrollTo(`accordion-button-${commandData.faqId}`, {
+              duration: 800,
+              delay: 0,
+              smooth: 'easeInOutQuart',
+            });
+            setIndex(commandData.faqId - 1);
+            setCurrentFaqId(commandData.faqId);
+          } else if (commandData.command === 'toggleColorMode') {
+            setToggleColorFlag(flag => !flag);
+          }
+        },
+      });
+    }
+  }, []);
+
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      <Navbar toggleColorFlag={toggleColorFlag} />
+      <Faq
+        index={index}
+        setIndex={setIndex}
+        currentFaqId={currentFaqId}
+        setCurrentFaqId={setCurrentFaqId}
+      />
     </ChakraProvider>
   );
-}
-
+};
 export default App;
