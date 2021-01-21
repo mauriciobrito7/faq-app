@@ -14,9 +14,15 @@ import FAQ_LIST from '../faq.json';
 
 export const Faq = ({ index, setIndex, currentFaqId, setCurrentFaqId }) => {
   return (
-    <Flex direction="column" p={4}>
+    <Flex
+      direction="column"
+      p={4}
+      style={{ fontFamily: 'InterMedium', fontWeight: 'normal' }}
+    >
       <Box mb="8">
-        <Heading size="md">Frequently Asked Questions</Heading>
+        <Heading size="md" fontSize={{ base: '18px', md: '32px', lg: '40px' }}>
+          Frequently Asked Questions ⁉
+        </Heading>
       </Box>
       <Accordion allowToggle index={index}>
         {FAQ_LIST.map(faq => (
@@ -34,11 +40,13 @@ export const Faq = ({ index, setIndex, currentFaqId, setCurrentFaqId }) => {
               }}
             >
               <Box flex="1" textAlign="left">
-                <Text fontWeight="semibold">{faq.question}</Text>
+                <Text fontSize={{ base: '18px', md: '26px' }}>
+                  {faq.question}
+                </Text>
               </Box>
               <AccordionIcon />
             </AccordionButton>
-            <AccordionPanel pb={4} fontSize="16px">
+            <AccordionPanel pb={4} fontSize={{ base: '16px', md: '24px' }}>
               {faq.answer}
             </AccordionPanel>
           </AccordionItem>

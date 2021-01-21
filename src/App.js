@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import { Navbar } from './components/Navbar/Navbar';
 import { Faq } from './components/Faq';
+import { Footer } from './components/Footer/Footer';
 import alanBtn from '@alan-ai/alan-sdk-web';
 import { scroller } from 'react-scroll';
 
@@ -42,6 +43,7 @@ const App = () => {
         currentFaqId={currentFaqId}
         setCurrentFaqId={setCurrentFaqId}
       />
+      <Footer />
     </ChakraProvider>
   );
 };
